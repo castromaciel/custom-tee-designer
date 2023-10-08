@@ -86,7 +86,7 @@ export const slideAnimation = (direction: Direction): AnimationStates => {
  * @property {AnimationState} animate - The animate state of the animation.
  * @property {AnimationState} exit - The exit state of the animation.
  */
-export const fadeAnimation = {
+export const fadeAnimation: AnimationStates = {
   initial: {
     opacity: 0,
     transition: { ...transition, delay: 0.5 },
