@@ -1,25 +1,26 @@
-import state from '@/store'
 import { CSSProperties, FC, MouseEventHandler } from 'react'
-import { useSnapshot } from 'valtio'
 
 type ButtonType = 'filled'
 
 interface ButtonProps {
-  type: ButtonType
-  title: string
-  onClick: MouseEventHandler<HTMLButtonElement>
+  backgroundColor?: string
   className?: string
+  onClick: MouseEventHandler<HTMLButtonElement>
+  title: string
+  type: ButtonType
 }
 
 const Button: FC<ButtonProps> = ({
-  onClick, title, type, className = ''
+  backgroundColor = '#efbd48',
+  className = '',
+  onClick,
+  title,
+  type
 }) => {
-  const snap = useSnapshot(state)
-
   const generateStyle = (type: ButtonType): CSSProperties => {
     if (type === 'filled') {
       return {
-        backgroundColor: snap.color,
+        backgroundColor,
         color: '#fff'
       }
     }
