@@ -7,6 +7,16 @@ class Server {
   constructor () {
     this.app = express()
     this.port = process.env.PORT ?? '8000'
+
+    this.routes()
+  }
+
+  routes (): void {
+    this.app.use('/', (req, res) => {
+      res.json({
+        message: 'Oops!.. Wrong url!'
+      })
+    })
   }
 
   listen (): void {
