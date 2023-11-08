@@ -1,13 +1,28 @@
-import { Button, Tab } from '@/components'
+import { AIPicker, Button, ColorPicker, FilePicker, TabList } from '@/components'
 import { EditorTabs, FilterTabs } from '@/config/constants'
 import { fadeAnimation, slideAnimation } from '@/config/motion'
 import { useStore } from '@/hooks'
 import state from '@/store'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Fragment } from 'react'
+import { Fragment, MouseEvent, useMemo, useState } from 'react'
 
 const Customizer = () => {
   const snap = useStore()
+
+  const [activeEditorTab, setActiveEditorTab] = useState('')
+
+  const handleEditorTabClick = (event: MouseEvent<HTMLDivElement>) => {
+    const tabName = event.currentTarget.id
+    setActiveEditorTab((prev) => prev === tabName ? '' : tabName)
+  }
+
+  const TabComponents = useMemo(() => ({
+    colorpicker: ColorPicker,
+    filepicker: FilePicker,
+    aipicker: AIPicker
+  }), [])
+
+  const TabPanelComponent = TabComponents[activeEditorTab as keyof typeof TabComponents] || null
 
   return (
     <AnimatePresence>
@@ -21,15 +36,13 @@ const Customizer = () => {
             >
               <div className='flex items-center min-h-screen'>
                 <div className='editortabs-container tabs'>
-                  {
-                    EditorTabs.map((tab) => (
-                      <Tab
-                        key={tab.name}
-                        tab={tab}
-                        onClick={() => { }}
-                      />
-                    ))
-                  }
+                  <TabList
+                    items={EditorTabs}
+                    onTabClick={handleEditorTabClick}
+                  />
+
+                  { TabPanelComponent && <TabPanelComponent /> }
+
                 </div>
               </div>
             </motion.div>
@@ -51,17 +64,10 @@ const Customizer = () => {
               {...slideAnimation('up')}
               className='filtertabs-container'
             >
-              {
-                FilterTabs.map((tab) => (
-                  <Tab
-                    key={tab.name}
-                    tab={tab}
-                    isFilterTab
-                    activeTab=''
-                    onClick={() => { }}
-                  />
-                ))
-              }
+              <TabList
+                items={FilterTabs}
+                onTabClick={(e) => console.log(e.currentTarget.id)}
+              />
             </motion.div>
           </Fragment>
         )
