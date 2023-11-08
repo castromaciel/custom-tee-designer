@@ -22,6 +22,7 @@ const Tab: FC<TabProps> = ({
 
   return (
     <div
+      id={tab.name}
       onClick={onClick}
       className={`tab-btn ${isFilterTab ? 'rounded-full glasmorphism' : 'rounded-4'}`}
       style={activeStyles}
