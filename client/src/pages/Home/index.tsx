@@ -38,7 +38,6 @@ const Home = () => {
                 </p>
 
                 <Button
-                  backgroundColor={state.primaryColor}
                   onClick={() => state.intro = false}
                   type='filled'
                   title='Customize it'
