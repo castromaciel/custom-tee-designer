@@ -1,9 +1,9 @@
+import { getContrastingColor } from '@/config/helpers'
+import { useStore } from '@/hooks'
 import { CSSProperties, FC, MouseEventHandler } from 'react'
-
-type ButtonType = 'filled'
+type ButtonType = 'filled' | 'outline'
 
 interface ButtonProps {
-  backgroundColor?: string
   className?: string
   onClick: MouseEventHandler<HTMLButtonElement>
   title: string
@@ -11,17 +11,26 @@ interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({
-  backgroundColor = '#efbd48',
   className = '',
   onClick,
   title,
   type
 }) => {
+  const snap = useStore()
+
   const generateStyle = (type: ButtonType): CSSProperties => {
     if (type === 'filled') {
       return {
-        backgroundColor,
-        color: '#fff'
+        backgroundColor: snap.primaryColor,
+        color: getContrastingColor(snap.primaryColor)
+      }
+    }
+
+    if (type === 'outline') {
+      return {
+        borderWidth: '1px',
+        borderColor: snap.primaryColor,
+        color: snap.primaryColor,
       }
     }
 
