@@ -1,4 +1,5 @@
 import { ai, fileIcon, logoShirt, stylishShirt, swatch } from '@/assets'
+import { DecalType } from '@/interfaces/constants.interface'
 
 export const EditorTabs = [
   {
@@ -26,7 +27,7 @@ export const FilterTabs = [
   },
 ]
 
-export const DecalTypes = {
+export const DecalTypes: { [key: string]: DecalType } = {
   logo: {
     stateProperty: "logoDecal",
     filterTab: "logoShirt",
