@@ -8,15 +8,15 @@ interface TabProps {
   }
   onClick: MouseEventHandler<HTMLDivElement>
   isFilterTab?: boolean
-  activeTab?: string
+  isActiveTab?: boolean
 }
 
 const Tab: FC<TabProps> = ({
-  onClick, tab, activeTab, isFilterTab
+  onClick, tab, isActiveTab, isFilterTab
 }) => {
   const snap = useStore()
 
-  const activeStyles: CSSProperties = isFilterTab && activeTab
+  const activeStyles: CSSProperties = isFilterTab && isActiveTab
     ? { backgroundColor: snap.primaryColor, opacity: 0.5 }
     : { backgroundColor: 'transparent', opacity: 1 }
 
@@ -24,7 +24,7 @@ const Tab: FC<TabProps> = ({
     <div
       id={tab.name}
       onClick={onClick}
-      className={`tab-btn ${isFilterTab ? 'rounded-full glasmorphism' : 'rounded-4'}`}
+      className={`tab-btn ${isFilterTab ? 'rounded-full glassmorphism' : 'rounded-4'}`}
       style={activeStyles}
     >
       <img 
