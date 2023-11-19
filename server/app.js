@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
-import Server from './src/server'
+const dotenv = require('dotenv')
+const Server = require('./src/server.js')
 
 dotenv.config()
 const server = new Server()

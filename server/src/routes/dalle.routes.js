@@ -1,6 +1,6 @@
-import dotenv from 'dotenv'
-import { Router } from 'express'
-import { OpenAI } from 'openai'
+const dotenv = require('dotenv')
+const { Router } = require('express')
+const { OpenAI } = require('openai')
 
 dotenv.config()
 

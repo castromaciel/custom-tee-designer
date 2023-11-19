@@ -1,7 +1,7 @@
-import cors from 'cors'
-import express from 'express'
+const cors = require('cors')
+const express = require('express')
 
-import dallesRoutes from './routes/dalle.routes'
+const dallesRoutes = require('./routes/dalle.routes.js')
 
 class Server {
   app
