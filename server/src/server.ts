@@ -14,6 +14,7 @@ class Server {
     this.app = express()
     this.port = process.env.PORT ?? '8000'
 
+    this.middlewares()
     this.routes()
   }
 

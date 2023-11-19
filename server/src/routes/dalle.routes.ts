@@ -1,11 +1,16 @@
+import dotenv from 'dotenv'
 import { Router } from 'express'
 import { OpenAI } from 'openai'
 
+dotenv.config()
+
 const router = Router()
 
-const openAI = new OpenAI({
+const config = {
   apiKey: process.env.OPENAI_KEY
-})
+}
+
+const openAI = new OpenAI(config)
 
 router.route('/').get((req, res) => {
   res.status(200).json({
