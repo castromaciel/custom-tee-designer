@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "build:render": "npm install & tsc",
     "dev": "tsc && nodemon dist/app.js",
     "start": "node dist/app.js",
     "tsc:watch": "tsc --watch"
