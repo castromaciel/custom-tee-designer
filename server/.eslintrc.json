@@ -1,5 +1,5 @@
 {
-  "parser": "@typescript-eslint/parser",
+  "parser": "eslint-config-airbnb",
   "extends": ["airbnb-base"],
   "parserOptions": {
     "ecmaVersion": 2020,

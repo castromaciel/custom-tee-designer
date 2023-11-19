@@ -5,31 +5,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "build:render": "npm install && tsc",
-    "dev": "tsc && nodemon dist/app.js",
-    "start": "node dist/app.js",
-    "tsc:watch": "tsc --watch"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/cors": "^2.8.14",
-    "@types/express": "^4.17.18",
-    "@types/node": "^20.8.3",
-    "@typescript-eslint/eslint-plugin": "^6.7.4",
-    "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.51.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.1.0",
-    "eslint-config-standard-with-typescript": "^39.1.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2"
+    "eslint-plugin-promise": "^6.0.0"
   },
   "dependencies": {
     "cors": "^2.8.5",

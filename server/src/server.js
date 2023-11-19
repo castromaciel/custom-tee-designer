@@ -1,14 +1,14 @@
 import cors from 'cors'
-import express, { type Application } from 'express'
+import express from 'express'
 
 import dallesRoutes from './routes/dalle.routes'
 
 class Server {
-  private readonly app: Application
+  app
 
-  private readonly port: string | number
+  port = '8000'
 
-  private readonly apiVersion = '/api/v1/dalle'
+  apiVersion = '/api/v1/dalle'
 
   constructor() {
     this.app = express()
@@ -18,12 +18,12 @@ class Server {
     this.routes()
   }
 
-  middlewares(): void {
+  middlewares() {
     this.app.use(cors())
     this.app.use(express.json({ limit: '50mb' }))
   }
 
-  routes(): void {
+  routes() {
     this.app.use(this.apiVersion, dallesRoutes)
     this.app.use('/', (req, res) => {
       res.json({
@@ -32,7 +32,7 @@ class Server {
     })
   }
 
-  listen(): void {
+  listen() {
     this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`)
     })
