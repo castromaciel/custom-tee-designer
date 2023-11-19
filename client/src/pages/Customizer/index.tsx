@@ -20,6 +20,9 @@ const Customizer = () => {
     stylishShirt: false
   })
 
+  const [prompt, setPrompt] = useState('')
+  const [generatingImg, setGeneratingImg] = useState(false)
+
   const handleEditorTabClick = (event: MouseEvent<HTMLDivElement>) => {
     const tabName = event.currentTarget.id
     setActiveEditorTab((prev) => prev === tabName ? '' : tabName)
@@ -63,6 +66,30 @@ const Customizer = () => {
       })
   }
 
+  const handleSubmit = async (type: string) => {
+    if (!prompt) return alert('Enter a prompt')
+
+    try {
+      setGeneratingImg(true)
+      const response = await fetch('http://localhost:8000/api/v1/dalle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt
+        })
+      })
+
+      const data: { photo: string } = await response.json()
+      handleDecals(type, `data:image/png;base64,${data.photo}`)
+
+    } catch (error) {
+      alert(error)
+    } finally {
+      setGeneratingImg(false)
+      setActiveEditorTab('')
+    }
+  }
+
   const TabComponents: Record<TabType, any> = useMemo(() => ({
     colorpicker: ColorPicker,
     filepicker: FilePicker,
@@ -91,11 +118,15 @@ const Customizer = () => {
                   {
                     TabPanelComponent && (
                       <TabPanelComponent
+                        prompt={prompt}
+                        setPrompt={setPrompt}
+                        generatingImg={generatingImg}
+                        handleSubmit={handleSubmit}
                         file={file}
                         readFile={readFile}
-                        setFile={setFile} 
+                        setFile={setFile}
                       />
-                  )}
+                    )}
 
                 </div>
               </div>
